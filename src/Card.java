@@ -5,7 +5,8 @@ public class Card {
 	String Name;
 	int Value;
 	String imageName;
-	Image img = new Image(imageName);
+	Image img;
+	
 	
 	public Card(){
 		
@@ -38,7 +39,14 @@ public class Card {
 	public String getSuit(){
 		return Suit;
 	}
+	public void setImage(){
+		
+		img = new Image(imageName, 175,175, true, true);
+		
+	}
 	public Image getImage(){
+		
 		return img;
+		
 	}
 }

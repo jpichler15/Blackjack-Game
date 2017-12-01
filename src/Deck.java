@@ -5,6 +5,7 @@ import java.util.Collections;
 import java.util.LinkedList;
 public class Deck<E> {
 	LinkedList<E> Deck = new LinkedList<E>();
+	int size=52;
 	public Deck(){
 		
 	}
@@ -19,5 +20,12 @@ public class Deck<E> {
 	}
 	public void shuffleDeck(){
 		Collections.shuffle(Deck);
+	}
+	public E Draw(){
+		Random ran = new Random();
+		E x = Deck.get(ran.nextInt(size));
+		Deck.remove(x);
+		size--;
+		return x;
 	}
 }

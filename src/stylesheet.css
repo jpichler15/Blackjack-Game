@@ -1,0 +1,84 @@
+.clearButton {
+	-fx-background-color: linear-gradient(#ff5400, #be1d00);
+    -fx-background-radius: 30;
+    -fx-background-insets: 0;
+    -fx-text-fill: white;
+}
+.submitButton {
+	-fx-background-color: linear-gradient(#ff5400, #be1d00);
+    -fx-background-radius: 30;
+    -fx-background-insets: 0;
+    -fx-text-fill: white;
+}
+.backGroundImage{
+	-fx-background-image: url("images.PNG");
+	-fx-background-size: 800 500;
+	-fx-background-repeat: stretch;
+}
+.backGroundColorOW{
+	-fx-background-size: 550 200;
+	-fx-background-image: url("openingWIndow.jpeg");
+	-fx-background-repeat: no-repeat;
+}
+.betButton{
+	-fx-background-color: linear-gradient(#ff5400, #be1d00);
+    -fx-background-radius: 30;
+    -fx-background-insets: 0;
+    -fx-text-fill: white;
+    -fx-font-size: 40;
+
+}
+.hitButton{
+    -fx-background-color: linear-gradient(#ff5400, #be1d00);
+    -fx-background-radius: 30;
+    -fx-background-insets: 0;
+    -fx-text-fill: white;
+    -fx-font-size: 40;
+
+}
+.quitButton{
+    -fx-background-color: linear-gradient(#ff5400, #be1d00);
+    -fx-background-radius: 30;
+    -fx-background-insets: 0;
+    -fx-text-fill: white;
+    -fx-font-size: 40;
+}
+.stayButton{
+    -fx-background-color: linear-gradient(#ff5400, #be1d00);
+    -fx-background-radius: 30;
+    -fx-background-insets: 0;
+    -fx-text-fill: white;
+    -fx-font-size: 40;
+}
+.yesButton {
+    -fx-background-color: linear-gradient(#ff5400, #be1d00);
+    -fx-background-radius: 30;
+    -fx-background-insets: 0;
+    -fx-text-fill: white;
+    -fx-font-size: 40;
+}
+.noButton {
+    -fx-background-color: linear-gradient(#ff5400, #be1d00);
+    -fx-background-radius: 30;
+    -fx-background-insets: 0;
+    -fx-text-fill: white;
+    -fx-font-size: 40;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
