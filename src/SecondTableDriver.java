@@ -25,18 +25,19 @@ import java.util.Random;
 import com.sun.corba.se.spi.orbutil.fsm.Guard.Result;
 public class SecondTableDriver {
 	public Deck<Card> theDeck = new Deck<Card>();
-	public Player gamePlayer;
-	int value;
+	Player gamePlayer;
+	int betValue;
 	public Pane yeah = new Pane();
 	public Button hit = new Button("Hit");
 	public Button stay = new Button("Stay");
 	public Scene scene = new Scene(yeah,800,700);
 	public Dealer dealer = new Dealer();
 	public HBox dealercards = new HBox();
+	boolean nextWindowOpen=false;
 	Stage gameStage = new Stage();
-	public SecondTableDriver(Player gamePlayer,int value) {
+	public SecondTableDriver(Player gamePlayer,int betValue) {
 		this.gamePlayer=gamePlayer;
-		this.value=value;
+		this.betValue=betValue;
 		
 	}
 	public void Display(){
@@ -69,14 +70,17 @@ public class SecondTableDriver {
         	yeah.getChildren().add(playerMoney);
 
         	gameStage.setScene(scene);
+        	
         	quit.setOnAction(new EventHandler<ActionEvent>() {
  	           @Override      
  	           public void handle(ActionEvent event) {
+ 	        	 if(nextWindowOpen==false){
  	        	   gameQuitWindow quit = new gameQuitWindow();
 					quit.Display(gameStage, gamePlayer);
-				
+ 	        	 }
  	           }  
         	});
+        
         	gameStage.show();
 		
 	}
@@ -90,23 +94,23 @@ public class SecondTableDriver {
 		 cards.setLayoutX(0);
 		 cards.setLayoutY(235);
 		 cards.setPrefSize(800, 175);
-		 
+		 dealerHand();
 		 for(int cnt = 0; cnt<2;cnt++){ 
 			cards.getChildren().add(new ImageView(gamePlayer.getHand().getCard(cnt).img));
 			cards.setAlignment(Pos.CENTER);
 		 }
 		 yeah.getChildren().add(cards);
-		 dealerHand();
+		 
 		 
 		 
 		 
 		 
 		 if(gamePlayer.getHand().getValue()>21){
 			gamePlayer.getHand().clearHand();
-			gamePlayer.Money=gamePlayer.Money-value;
+			gamePlayer.Money=gamePlayer.Money-betValue;
 			nextHandWindow nextHand = new nextHandWindow();
-			
-			nextHand.Display(gamePlayer,Result("You busted"),gameStage);
+			nextWindowOpen=true;
+			nextHand.Display(gamePlayer,Result("You busted"),gameStage,nextWindowOpen);
 			//gameStage.close();
 	  	           
 		 }else if(gamePlayer.getHand().getValue()<21){
@@ -116,77 +120,85 @@ public class SecondTableDriver {
         	   directions.setLayoutX(400);
         	   directions.setLayoutY(525);
         	   yeah.getChildren().add(directions);
-			 stay.setOnAction(new EventHandler<ActionEvent>() {
+       	   
+			stay.setOnAction(new EventHandler<ActionEvent>() {
 	  	           @Override      
 	  	           public void handle(ActionEvent event) {
-	  	        	     hit.disarm();
-	  	        	     do{
+	  	        	  if(nextWindowOpen==false){
+	  	        	     while(dealer.getHand().getValue()<17){
 	  	        	    	 dealer.getHand().addCard(theDeck.Draw());
-	  	        	     }while(dealer.getHand().getValue()<16);
+	  	        	     }
+	  	        	    
 	  	        	     dealercards.getChildren().remove(1);
-	  	        	     dealercards.getChildren().remove(0);
-	  	        	     for(int dealercard=0;dealercard<dealer.getHand().Hand.size();dealercard++){
+	  	        	     for(int dealercard=1;dealercard<dealer.getHand().theHand.size();dealercard++){
 	  	        	    	 dealercards.getChildren().add(new ImageView(dealer.getHand().getCard(dealercard).img));
 	  	        	     }
+	  	        	    
 	  	        	     if(dealer.dealerHand.getValue()>21){
 	  	        	    	 gamePlayer.getHand().clearHand();
 	  	        	    	 dealer.getHand().clearHand();
-	  	        	    	 gamePlayer.Money = gamePlayer.Money+(value*2);
+	  	        	    	 gamePlayer.Money = gamePlayer.Money+(betValue*2);
 	 	  	        		 nextHandWindow nextHand = new nextHandWindow();
-	 	  	        		 nextHand.Display(gamePlayer,Result("Dealer busted. You win"),gameStage);
-	 	  	        		 //gameStage.close();
+	 	  	        		 nextWindowOpen=true;
+	 	  	        		 nextHand.Display(gamePlayer,Result("Dealer busted. You win"),gameStage,nextWindowOpen);
+	 	  	        		
 	  	        	     }else if(dealer.dealerHand.getValue()>gamePlayer.getHand().getValue()){
 	  	        	    	 gamePlayer.getHand().clearHand();
 	  	        	    	 dealer.getHand().clearHand();
 	 	  	        		 nextHandWindow nextHand = new nextHandWindow();
-	 	  	        		 nextHand.Display(gamePlayer,Result("Dealer won"),gameStage);
-	 	  	        		 //gameStage.close();
+	 	  	        		 nextWindowOpen=true;
+	 	  	        		 nextHand.Display(gamePlayer,Result("Dealer won"),gameStage,nextWindowOpen);
+	 	  	        		 
 	  	        	     }else if(dealer.dealerHand.getValue()<gamePlayer.getHand().getValue()){
 	  	        	    	 gamePlayer.getHand().clearHand();
 	  	        	    	 dealer.getHand().clearHand();
-	  	        	    	 gamePlayer.Money = gamePlayer.Money+(value*2);
+	  	        	    	 gamePlayer.Money = gamePlayer.Money+(betValue*2);
 	 	  	        		 nextHandWindow nextHand = new nextHandWindow();
-	 	  	        		 nextHand.Display(gamePlayer,Result("Dealer won"),gameStage);
-	 	  	        		 //gameStage.close();
+	 	  	        		 nextWindowOpen=true;
+	 	  	        		 nextHand.Display(gamePlayer,Result("You Won"),gameStage,nextWindowOpen);
+	 	  	        		 
 	  	        	     }
-	  	        	    
+	  	        	  } 
 	  	           }  
 	  	           
 	         	});
+			
+			
 			 hit.setOnAction(new EventHandler<ActionEvent>() {
 	  	           @Override      
 	  	           public void handle(ActionEvent event) {
+	  	        	if(nextWindowOpen==false){   
 	  	        	 gamePlayer.getHand().addCard(theDeck.Draw());
-	  	        	 cards.getChildren().add(new ImageView(gamePlayer.getHand().getCard(gamePlayer.getHand().Hand.size()-1).img));
+	  	        	 cards.getChildren().add(new ImageView(gamePlayer.getHand().getCard(gamePlayer.getHand().theHand.size()-1).img));
 	  	        	 cards.setAlignment(Pos.CENTER);
-	  	        	 hit.disarm();
-	  	        	 if(gamePlayer.getHand().getValue()<21){
-	  	        		 hit.arm();
-	  	        	 }else if(gamePlayer.getHand().getValue()==21){
-	  	        		hit.disarm();
-	  	        		gamePlayer.Money=gamePlayer.Money+(value*2);
+	  	        	 if(gamePlayer.getHand().getValue()==21){
+	  	        		gamePlayer.Money=gamePlayer.Money+(betValue*2);
 	  	        		gamePlayer.getHand().clearHand();
 	  				 	nextHandWindow nextHand = new nextHandWindow();
-	  				 	nextHand.Display(gamePlayer,Result("Blackjack!!!!"),gameStage);
+	  				 	nextWindowOpen=true;
+	  				 	nextHand.Display(gamePlayer,Result("Blackjack!!!!"),gameStage,nextWindowOpen);
 	  				 	//gameStage.close();
 	  				 
 	  	        	 }else if(gamePlayer.getHand().getValue()>21){
-	  	        		 hit.disarm();
 	  	        		 gamePlayer.getHand().clearHand();
-	  	        		// gamePlayer.Money=gamePlayer.Money-value;
+	  	        		//gamePlayer.Money=gamePlayer.Money-value;
 	  	        		 nextHandWindow nextHand = new nextHandWindow();
-	  	        		 nextHand.Display(gamePlayer,Result("You busted"),gameStage);
+	  	        		nextWindowOpen=true;
+	  	        		 nextHand.Display(gamePlayer,Result("You busted"),gameStage,nextWindowOpen);
 	  	        		 //gameStage.close();
 	  	  	  	           
 	  	        	 }
-	  	           }  
+	  	        	} 
+	  	           }	
 	  	           
 	        });
+	 
 		 }else if(gamePlayer.getHand().getValue()==21){
-			 gamePlayer.Money=gamePlayer.Money+(value*2);
+			 gamePlayer.Money=gamePlayer.Money+(betValue*2);
 			 gamePlayer.getHand().clearHand();
 			 nextHandWindow nextHand = new nextHandWindow();
-			 nextHand.Display(gamePlayer,Result("BlackJack!!!!"),gameStage);
+			 nextWindowOpen=true;
+			 nextHand.Display(gamePlayer,Result("BlackJack!!!!"),gameStage,nextWindowOpen);
 			 //gameStage.close();
 			 
 		 }
@@ -198,19 +210,19 @@ public class SecondTableDriver {
 		return result;
 	}
 	public void dealerHand(){
-		
+	
 		for(int i=0;i<2;i++){
-	   	   dealer.getHand().addCard(theDeck.Draw());; 
+	   	   dealer.getHand().addCard(theDeck.Draw()); 
 	   	}
-		
 		dealercards.setLayoutX(0);
 		dealercards.setLayoutY(55);
 		dealercards.setPrefSize(800, 175);
-		dealercards.getChildren().add(new ImageView(gamePlayer.getHand().getCard(0).img));
+		dealercards.getChildren().add(new ImageView(dealer.getHand().getCard(0).img));
 		Image turnedCard = new Image("faceDown.PNG",175,175,true,true);
 		dealercards.getChildren().add(new ImageView(turnedCard));
 		dealercards.setAlignment(Pos.CENTER);
 		yeah.getChildren().add(dealercards);
+		
 		
 	}
 public void loadDeck(){

@@ -9,7 +9,7 @@ import javafx.scene.text.Text;
 import javafx.stage.Stage;
 
 public class nextHandWindow {
-	public void Display(Player gamePlayer,Text result,Stage oldStage){
+	public void Display(Player gamePlayer,Text result,Stage oldStage,boolean nextWindowOpen){
 		Stage quitStage = new Stage();
 		quitStage.setTitle("Play Next Hand");
 		Pane yeah = new Pane();
@@ -39,12 +39,14 @@ public class nextHandWindow {
 	           @Override      
 	           public void handle(ActionEvent event) {
 	        	   //going to access highscore sheet load into arraylist and then if the score/money is bigger than the any of the scores place it on the highscore sheet at the correct spot
+	        	  
 	        	   oldStage.close();
 	        	   quitStage.close();
   	        	   TableDriver newDriver = new TableDriver(gamePlayer);
   	        	   newDriver.Display();
 	        	   
-	          }  
+	          } 
+	           
 	    });
     	no.setOnAction(new EventHandler<ActionEvent>() {
 	           @Override      
