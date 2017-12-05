@@ -114,10 +114,10 @@ public class SecondTableDriver {
 			//gameStage.close();
 	  	           
 		 }else if(gamePlayer.getHand().getValue()<21){
-			   Text directions = new Text("Hit stay to stay and hit to get another card");
+			   Text directions = new Text("Click stay to stay and click hit to get another card");
         	   directions.setFill(Color.BLACK);
         	   directions.setFont(Font.font(java.awt.Font.SANS_SERIF, 20));
-        	   directions.setLayoutX(400);
+        	   directions.setLayoutX(360);
         	   directions.setLayoutY(525);
         	   yeah.getChildren().add(directions);
        	   
@@ -148,7 +148,13 @@ public class SecondTableDriver {
 	 	  	        		 nextHandWindow nextHand = new nextHandWindow();
 	 	  	        		 nextWindowOpen=true;
 	 	  	        		 nextHand.Display(gamePlayer,Result("Dealer won"),gameStage,nextWindowOpen);
-	 	  	        		 
+	  	        	     }else if(dealer.dealerHand.getValue()==gamePlayer.getHand().getValue()){
+		  	        	    	 gamePlayer.getHand().clearHand();
+		  	        	    	 dealer.getHand().clearHand();
+		  	        	    	 gamePlayer.Money = gamePlayer.Money+(betValue);
+		 	  	        		 nextHandWindow nextHand = new nextHandWindow();
+		 	  	        		 nextWindowOpen=true;
+		 	  	        		 nextHand.Display(gamePlayer,Result("You Tied"),gameStage,nextWindowOpen);		 	  	        		 		  	        	 	  	        		 
 	  	        	     }else if(dealer.dealerHand.getValue()<gamePlayer.getHand().getValue()){
 	  	        	    	 gamePlayer.getHand().clearHand();
 	  	        	    	 dealer.getHand().clearHand();

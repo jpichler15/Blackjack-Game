@@ -54,8 +54,9 @@ public class nextHandWindow {
 	        	   //going to access highscore sheet load into arraylist and then if the score/money is bigger than the any of the scores place it on the highscore sheet at the correct spot
 	        	   oldStage.close();
 	        	   quitStage.close();
-	        	   System.out.println(gamePlayer.Name+" : "+ gamePlayer.Money);
-	          }  
+	        	   FinalWindow done = new FinalWindow(gamePlayer);
+	        	   done.display();
+	           }  
 	    });
     	quitStage.show();
 	}
