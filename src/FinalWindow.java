@@ -22,9 +22,10 @@ public class FinalWindow {
 		Pane yeah = new Pane();
 		Scene scene = new Scene(yeah,250,250);
 		Button close = new Button("Close");
+		scene.getStylesheets().add("stylesheet.css");
 		close.getStyleClass().add("closeButton");
-		close.setLayoutY(200);
-		close.setLayoutX(100);
+		close.setLayoutY(150);
+		close.setLayoutX(45);
 		close.setAlignment(Pos.CENTER);
 		Text score = new Text("You earned: $" + gamePlayer.Money);
 		score.setLayoutX(50);

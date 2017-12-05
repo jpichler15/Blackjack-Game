@@ -28,6 +28,23 @@ public class Hand {
 	public Card getCard(int index){
 		return theHand.get(index);
 	}
+	public boolean containsAce(){
+		boolean x = false;
+		for(int i = 0;i<theHand.size();i++){
+			if(theHand.get(i).getValue()==11){
+				x=true;
+			}
+		}
+		return x;
+	}
+	public void setAce(){
+		for(int i = 0;i<theHand.size();i++){
+			if(theHand.get(i).getValue()==11){
+				theHand.get(i).setValue(1);
+				break;
+			}
+		}
+	}
 	public int getValue(){
 		int value=0;
 		for(int i=0;i<theHand.size();i++){
