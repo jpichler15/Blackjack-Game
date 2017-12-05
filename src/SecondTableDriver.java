@@ -45,14 +45,14 @@ public class SecondTableDriver {
 			gameStage.setTitle("BlackJackGame");
         	scene.getStylesheets().add("stylesheet.css");
         	yeah.getStyleClass().add("backGroundImage");
-        	Text playerMoney = new Text(gamePlayer.getName() + " has: $" + gamePlayer.Money);
+        	Text playerMoney = new Text("$" + gamePlayer.Money);
 	    	playerMoney.setFill(Color.BLACK);
 	    	playerMoney.setFont(Font.font(java.awt.Font.SANS_SERIF, 20));
         	Button bet = new Button("Bet");
         	Button quit = new Button("Quit");
         	cardValue.setFill(Color.BLACK);
      	   	cardValue.setFont(Font.font(java.awt.Font.SANS_SERIF, 20));
-     	   	cardValue.setLayoutX(200);
+     	   	cardValue.setLayoutX(150);
      	   	cardValue.setLayoutY(525);
         	bet.setLayoutX(50);
         	bet.setLayoutY(575);
