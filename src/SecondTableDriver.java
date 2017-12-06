@@ -116,7 +116,9 @@ public class SecondTableDriver {
 		 if(gamePlayer.getHand().getValue()>21){
 			if(gamePlayer.getHand().containsAce()){
        			gamePlayer.getHand().setAce();
+       			cardValue.setText("Hand Value: " +gamePlayer.getHand().getValue());
        		}else{
+       			cardValue.setText("Hand Value: " +gamePlayer.getHand().getValue());
        			gamePlayer.getHand().clearHand();
        			gamePlayer.Money=gamePlayer.Money-betValue;
        			nextHandWindow nextHand = new nextHandWindow();
@@ -202,6 +204,7 @@ public class SecondTableDriver {
 	  	       	   
 	  	        	 
 	  	        	 if(gamePlayer.getHand().getValue()==21){
+	  	        		cardValue.setText("Hand Value: " +gamePlayer.getHand().getValue());
 	  	        		gamePlayer.Money=gamePlayer.Money+(betValue*2);
 	  	        		gamePlayer.getHand().clearHand();
 	  				 	nextHandWindow nextHand = new nextHandWindow();
@@ -212,11 +215,11 @@ public class SecondTableDriver {
 	  	        	 }else if(gamePlayer.getHand().getValue()>21){
 	  	        		if(gamePlayer.getHand().containsAce()){
 	  	        			gamePlayer.getHand().setAce();
+	  	        			cardValue.setText("Hand Value: " +gamePlayer.getHand().getValue());
 	  	        		}else{
-	  	        		gamePlayer.getHand().clearHand();
-	  	        		
+	  	        		 gamePlayer.getHand().clearHand();
 	  	        		 nextHandWindow nextHand = new nextHandWindow();
-	  	        		nextWindowOpen=true;
+	  	        		 nextWindowOpen=true;
 	  	        		 nextHand.Display(gamePlayer,Result("You busted"),gameStage,nextWindowOpen);
 	  	        		 //gameStage.close();
 	  	        		}   
@@ -228,6 +231,7 @@ public class SecondTableDriver {
 	        });
 	 
 		 }else if(gamePlayer.getHand().getValue()==21){
+			 cardValue.setText("Hand Value: " +gamePlayer.getHand().getValue());
 			 gamePlayer.Money=gamePlayer.Money+(betValue*2);
 			 gamePlayer.getHand().clearHand();
 			 nextHandWindow nextHand = new nextHandWindow();
