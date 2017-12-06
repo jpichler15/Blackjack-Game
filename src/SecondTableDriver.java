@@ -161,7 +161,7 @@ public class SecondTableDriver {
 	  	        	    		 gamePlayer.Money = gamePlayer.Money+(betValue*2);
 	  	        	    		 nextHandWindow nextHand = new nextHandWindow();
 	  	        	    		 nextWindowOpen=true;
-	  	        	    		 nextHand.Display(gamePlayer,Result("Dealer busted. You win"),gameStage,nextWindowOpen);
+	  	        	    		 nextHand.Display(gamePlayer,Result("Dealer busted. You win"),gameStage,nextWindowOpen);//to push
 	  	        	    	 
 	 	  	        		
 	  	        	     }else if(dealer.dealerHand.getValue()>gamePlayer.getHand().getValue()){
